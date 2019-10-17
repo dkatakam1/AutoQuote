@@ -1,0 +1,206 @@
+<div class="card mx-auto">
+    
+    <div class="card-header">
+       <app-status-bar activeStepId="additionalInfo"></app-status-bar>
+    </div>
+
+    <div class="card-body">
+            <form [formGroup]="form">
+                <div class="justify-content-center col-12 col-lg-12 col-md-12 col-sm-12 col-xl-12">
+
+                    <div class="form-row col-12 mb-2 mt-2">
+                        <div class="form-group col-12 col-lg-2 col-md-2 col-sm-12 col-xl-2">
+                            <label for="prefix">Prefix</label>
+                            <select class="form-control select-no-padding" formControlName='prefix' id="prefix"
+                                (change)="storeValueToLocalStorage($event)" (ngModelChange)="onChangePrefix($event)">
+                                <option [ngValue]="null" selected disabled>Select</option>
+                                <option value="Dr.">Dr.</option>
+                                <option value="Mr.">Mr.</option>
+                                <option value="Ms.">Ms.</option>
+                                <option value="Mrs.">Mrs.</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-12 col-lg-4 col-md-4 col-sm-12 col-xl-4"
+                            [ngClass]="getFieldDisplayClass('firstName')">
+                            <label for="firstName">First Name</label>
+                            <input type="text" appAutoFocus class="form-control" formControlName='firstName' id="firstName"
+                                (change)="storeValueToLocalStorage($event)">
+    
+                            <div class="text-danger" *ngIf="hasInValidValue('firstName')">
+                                <p *ngIf="formControls.firstName.errors.required">First name is required</p>
+                            </div>
+                        </div>
+                        <div class="form-group col-12 col-lg-4 col-md-4 col-sm-12 col-xl-4"
+                            [ngClass]="getFieldDisplayClass('lastName')">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" (change)="storeValueToLocalStorage($event)" class="form-control"
+                                formControlName='lastName' id="lastName">
+                            <div class="text-danger" *ngIf="hasInValidValue('lastName')">
+                                <p *ngIf="formControls.lastName.errors.required">Last name is required</p>
+                            </div>
+                        </div>
+                        <div class="form-group col-12 col-lg-2 col-md-2 col-sm-12 col-xl-2">
+                                <label for="suffix">Suffix</label>
+                                <select class="form-control select-no-padding"  (change)="storeValueToLocalStorage($event)"
+                                    formControlName='suffix' id="suffix">
+                                    <option [ngValue]="null" selected disabled>Select</option>
+                                    <option value="II">II</option>
+                                    <option value="III">III</option>
+                                    <option value="IV">IV</option>
+                                    <option value="I">I</option>
+                                    <option value="D.O.">D.O.</option>
+                                    <option value="M.D.">M.D.</option>
+                                    <option value="PhD">PhD</option>
+                                    <option value="Jr.">Jr.</option>
+                                    <option value="Sr.">Sr.</option>
+                                </select>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-row col-12 mb-2">
+                        <div class="form-group col-12 col-lg-6 col-md-6 col-sm-12 col-xl-6"
+                            [ngClass]="getFieldDisplayClass('email')">
+                            <label for="email">Email</label>
+                            <input type="email" formControlName='email' (change)="storeValueToLocalStorage($event)"
+                                class="form-control" id="email">
+                            <div class="mx-auto text-danger" *ngIf="hasInValidValue('email')">
+                                <p *ngIf="formControls.email.errors.required">Email is required</p>
+                                <p *ngIf="formControls.email.errors.email">Not a valid email address</p>
+                            </div>
+                        </div>
+
+                            <div class="form-group col-12 col-lg-4 col-md-4 col-sm-12 col-xl-4"
+                                [ngClass]="getFieldDisplayClass('birthday')">
+                                <label for="birthday">Date of birth</label>
+                                <table cellspacing="0" cellpadding="0">
+                                    <tr >
+                                        <td><input type="text" (change)="storeValueToLocalStorage($event)" 
+                                                    class="form-control"  formControlName='birthday' id="day" placeholder="DD">
+                                        </td>
+                                        <td><input type="text" (change)="storeValueToLocalStorage($event)" 
+                                                    class="form-control"  formControlName='birthday' id="month" placeholder="MM">
+                                        </td>
+                                        <td><input type="text" (change)="storeValueToLocalStorage($event)" 
+                                                    class="form-control"  formControlName='birthday' id="year" placeholder="YYYY">
+                                        </td>
+                                    </tr>
+                                </table>
+        
+
+                                <div class="text-danger" *ngIf="hasInValidValue('birthday')">
+                                    <p *ngIf="formControls.birthday.errors.required">Date of birth is required</p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-row col-12 mb-2">
+                                <div class="form-group col-12 col-lg-6 col-md-6 col-sm-12 col-xl-6"
+                                    [ngClass]="getFieldDisplayClass('gender')">
+                                    <label for="gender">Gender</label>
+
+
+                                    <table cellspacing="0" cellpadding="0">
+                                            <tr >
+                                                <td>
+                                                    <label class="mycheck" [ngClass]="{'status-active' : gender.male}">
+                                                         <input type="checkbox"  formControlName = 'male' (click)="storeValueToLocalStorage($event)" 
+                                                      id="male">
+                                                      <span class="geekmark">Male</span> 
+                                                    </label>
+     
+                                                </td>
+                                                <td>
+                                                    <label class="mycheck" [ngClass]="{'status-active' : gender.female}">
+                                                    <input type="checkbox"  formControlName = 'female' (click)="storeValueToLocalStorage($event)" 
+                                                       id="female">
+                                                       <span class="geekmark">Female</span> 
+                                                       </label>
+                                                    
+                                                </td>
+                                                <td>
+                                                    <label class="mycheck" [ngClass]="{'status-active' : gender.nonBinary}">
+                                                    <input type="checkbox"  formControlName = 'nonBinary' (click)="storeValueToLocalStorage($event)" 
+                                                    id="non-binary">
+                                                    <span class="geekmark">Non-binary</span> 
+                                                    </label>
+                                                    
+                                                </td>
+                                            </tr>
+                                        </table>
+    
+            
+                                    <div class="text-danger" *ngIf="hasInValidValue('gender')">
+                                        <p *ngIf="formControls.gender.errors.required">Gender is required</p>
+                                    </div>
+                                </div>
+                                <div class="form-group col-12 col-lg-6 col-md-6 col-sm-12 col-xl-6">
+                                  
+                                    <label for="maritalStatus">Marital status</label>
+
+                           
+                                    <table cellspacing="0" cellpadding="0">
+                                        <tr >
+                                            <td>
+                                                <label class="mycheck" [ngClass]="{'status-active' : maritalStatus.single}">
+                                                     <input type="checkbox"  value="single" formControlName = 'single' (click)="storeValueToLocalStorage($event)" 
+                                                  id="single">
+                                                  <span class="geekmark">Single</span> 
+                                                </label>
+ 
+                                            </td>
+                                            <td>
+                                                <label class="mycheck" [ngClass]="{'status-active' : maritalStatus.married}">
+                                                <input type="checkbox"  value="married" formControlName = 'married' (click)="storeValueToLocalStorage($event)" 
+                                                   id="married">
+                                                   <span class="geekmark">Married</span> 
+                                                   </label>
+                                                
+                                            </td>
+                                            <td>
+                                                <label class="mycheck" [ngClass]="{'status-active' : maritalStatus.widowed}">
+                                                <input type="checkbox"  value="widowed" formControlName = 'widowed' (click)="storeValueToLocalStorage($event)" 
+                                                id="widowed">
+                                                <span class="geekmark">Widowed</span> 
+                                                </label>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
+                                    <div class="text-danger" *ngIf="hasInValidValue('maritalStat')">
+                                        <p *ngIf="formControls.maritalStat.errors.required">Marital status is required</p>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-row col-12 mb-2">
+                                    <div class="form-group col-12 col-lg-6 col-md-6 col-sm-12 col-xl-6"
+                                        [ngClass]="getFieldDisplayClass('contact')">
+                                        <label for="contact">Preferred Contact Number</label>
+                                        <input type="text" appAutoFocus class="form-control" formControlName='contactNumber' id="contactNumber"
+                                        (change)="storeValueToLocalStorage($event)" placeholder="Contact number">
+
+
+                                    </div>
+                            </div>
+
+
+                </div>
+
+
+            </form>
+    </div>
+        
+
+    <div class="card-footer">
+        Footer
+    </div>
+
+  </div>
