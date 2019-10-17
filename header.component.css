@@ -1,0 +1,41 @@
+.navbar{
+    background-color: #3774AF !important;
+    width:1024px;
+    height:164px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -200%);      
+}
+
+.navbar .navbar-brand{
+    color : #FFF;
+}
+
+
+.navbar .navbar-brand .aaa-logo{
+    width:209px;
+    height:114px;
+    margin-left: -140.5px;  
+    margin-top:28px;
+}
+
+
+.navbar .navbar-header{
+    color : #FFF;
+}
+
+.navbar .navbar-header-text{
+    font-size: 36px;
+    line-height:43px;
+    margin-left:-80%;
+    margin-top:30%;
+    font-family:'Roboto Condensed', sans-serif;
+    color: #FFF !important;
+
+}
+
+.container-fluid{
+    /* flex-wrap: wrap; */
+    justify-content: space-around;
+}
